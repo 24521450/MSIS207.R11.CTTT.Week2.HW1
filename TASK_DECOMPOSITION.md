@@ -6,11 +6,11 @@ This work follows the four stages from Lab 2 slide 5: functional slicing, contra
 
 - [x] Create the public GitHub repository and an independent local checkout named MSIS207.R11.CTTT.Week2.HW1 beside W2.
 - [x] Record project rules and this work breakdown before application code.
-- [ ] Define shared public TypeScript API and strict Vite project scaffold.
+- [x] Define shared public TypeScript API and strict Vite project scaffold.
 - [x] Define and implement pure data operations: search, typed comparison, sorting, page clamping, and pagination.
-- [ ] Define and implement the accessible grid: native table markup, ARIA roles, sort buttons, stable IDs, selection, roving tabindex, keyboard movement, and focus recovery.
+- [x] Define and implement the accessible grid: native table markup, ARIA roles, sort buttons, stable IDs, selection, roving tabindex, keyboard movement, and focus recovery.
 - [ ] Define and implement the 20-row local demo and polished responsive page.
-- [ ] Add behavior tests for sort, filter plus pagination, empty results, identity-preserved selection, keyboard movement, and focus recovery.
+- [x] Add behavior tests for sort, filter plus pagination, empty results, identity-preserved selection, keyboard movement, and focus recovery.
 - [ ] Run strict typecheck, test suite, production build, browser review, accessibility checks, and production Lighthouse.
 - [ ] Record only observed AI failure modes and their reproduction/evidence/fixes.
 - [ ] Complete concise README, verify Git hygiene, and push all commits to main.
@@ -76,10 +76,10 @@ Provide exactly 20 deterministic records; id is unique and stable, text columns 
 
 ## Stage 3 — Atomic implementation and commits
 
-- [ ] Commit project rules/WBS before source code.
-- [ ] Commit the Vite/React/strict TypeScript scaffold and shared contracts.
-- [ ] Commit pure filtering, sorting, and pagination helpers with focused tests.
-- [ ] Commit grid semantics, keyboard interactions, stable selection, and focus recovery with interaction tests.
+- [x] Commit project rules/WBS before source code.
+- [x] Commit the Vite/React/strict TypeScript scaffold and shared contracts.
+- [x] Commit pure filtering, sorting, and pagination helpers with focused tests.
+- [x] Commit grid semantics, keyboard interactions, stable selection, and focus recovery with interaction tests.
 - [ ] Commit the local demo and responsive CSS.
 - [ ] Commit verified documentation and real failure audit entries.
 - [ ] Fix any defects found during verification in separate, focused Conventional Commits.
