@@ -7,7 +7,7 @@ This work follows the four stages from Lab 2 slide 5: functional slicing, contra
 - [x] Create the public GitHub repository and an independent local checkout named MSIS207.R11.CTTT.Week2.HW1 beside W2.
 - [x] Record project rules and this work breakdown before application code.
 - [ ] Define shared public TypeScript API and strict Vite project scaffold.
-- [ ] Define and implement pure data operations: search, typed comparison, sorting, page clamping, and pagination.
+- [x] Define and implement pure data operations: search, typed comparison, sorting, page clamping, and pagination.
 - [ ] Define and implement the accessible grid: native table markup, ARIA roles, sort buttons, stable IDs, selection, roving tabindex, keyboard movement, and focus recovery.
 - [ ] Define and implement the 20-row local demo and polished responsive page.
 - [ ] Add behavior tests for sort, filter plus pagination, empty results, identity-preserved selection, keyboard movement, and focus recovery.
@@ -61,7 +61,7 @@ The model must compare numbers numerically, compare text with a stable locale-aw
       id: string;
       name: string;
       department: string;
-      email: string;
+      office: string;
       projects: number;
       utilization: number;
     }
@@ -94,3 +94,4 @@ Provide exactly 20 deterministic records; id is unique and stable, text columns 
 - [ ] Lighthouse runs against the production build and reports Accessibility 100 and Best Practices 100, with saved JSON/HTML and environment details.
 - [ ] Screen reader is checked only if available; otherwise mark it unverified.
 - [ ] Git history uses Conventional Commits; remote repository is public, default branch is main, and the working tree is clean after push.
+
