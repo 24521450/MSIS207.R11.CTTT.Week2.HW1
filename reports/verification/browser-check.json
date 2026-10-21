@@ -1,0 +1,70 @@
+{
+  "desktop": {
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "renderedDataRows": 10,
+    "totalRecords": 20
+  },
+  "accessibilityDefault": {
+    "passes": 30,
+    "violations": [],
+    "incomplete": [
+      "aria-prohibited-attr",
+      "color-contrast"
+    ]
+  },
+  "mobile": {
+    "viewportWidth": 390,
+    "documentWidth": 390,
+    "tableViewportWidth": 322,
+    "tableContentWidth": 760
+  },
+  "numericSort": {
+    "ariaSort": "ascending",
+    "firstPageValues": [
+      2,
+      2,
+      2,
+      2,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+    ]
+  },
+  "filterAfterPagination": {
+    "query": "Engineering",
+    "page": "Page 1 of 1",
+    "matchingRows": 6
+  },
+  "emptyState": {
+    "passes": 30,
+    "violations": [],
+    "incomplete": [
+      "aria-prohibited-attr",
+      "color-contrast"
+    ]
+  },
+  "keyboardAndCallback": {
+    "arrowNavigation": "right, down, left, up, down",
+    "enterSelected": "Isabella Do",
+    "spaceClearedSelection": true,
+    "callbackAnnounced": true
+  },
+  "browserErrors": {
+    "pageErrors": [],
+    "consoleErrors": []
+  },
+  "environment": {
+    "platform": "win32",
+    "osRelease": "10.0.26300",
+    "node": "v24.15.0",
+    "browser": "155.0.8059.85",
+    "appUrl": "http://127.0.0.1:4173/",
+    "checkedAt": "2026-10-21T08:03:59.328Z"
+  }
+}

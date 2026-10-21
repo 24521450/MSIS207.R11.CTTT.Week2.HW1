@@ -9,11 +9,11 @@ This work follows the four stages from Lab 2 slide 5: functional slicing, contra
 - [x] Define shared public TypeScript API and strict Vite project scaffold.
 - [x] Define and implement pure data operations: search, typed comparison, sorting, page clamping, and pagination.
 - [x] Define and implement the accessible grid: native table markup, ARIA roles, sort buttons, stable IDs, selection, roving tabindex, keyboard movement, and focus recovery.
-- [ ] Define and implement the 20-row local demo and polished responsive page.
+- [x] Define and implement the 20-row local demo and polished responsive page.
 - [x] Add behavior tests for sort, filter plus pagination, empty results, identity-preserved selection, keyboard movement, and focus recovery.
-- [ ] Run strict typecheck, test suite, production build, browser review, accessibility checks, and production Lighthouse.
-- [ ] Record only observed AI failure modes and their reproduction/evidence/fixes.
-- [ ] Complete concise README, verify Git hygiene, and push all commits to main.
+- [x] Run strict typecheck, test suite, production build, browser review, accessibility checks, and production Lighthouse.
+- [x] Record only observed AI failure modes and their reproduction/evidence/fixes.
+- [x] Complete the README and reports, verify Git hygiene, and push the commit history to main.
 
 ## Stage 2 — Contracts before implementation
 
@@ -80,18 +80,18 @@ Provide exactly 20 deterministic records; id is unique and stable, text columns 
 - [x] Commit the Vite/React/strict TypeScript scaffold and shared contracts.
 - [x] Commit pure filtering, sorting, and pagination helpers with focused tests.
 - [x] Commit grid semantics, keyboard interactions, stable selection, and focus recovery with interaction tests.
-- [ ] Commit the local demo and responsive CSS.
-- [ ] Commit verified documentation and real failure audit entries.
-- [ ] Fix any defects found during verification in separate, focused Conventional Commits.
+- [x] Commit the local demo and responsive CSS.
+- [x] Commit verified documentation and real failure audit entries.
+- [x] Fix defects found during verification in separate, focused Conventional Commits.
 
 ## Stage 4 — Independent verification
 
-- [ ] Typecheck passes with strict TypeScript.
-- [ ] Unit/component tests cover each required scenario.
-- [ ] Production build succeeds.
-- [ ] Browser review covers desktop and narrow viewport, sorting, search, pagination, empty state, selection, and keyboard focus.
-- [ ] Automated accessibility check reports no unresolved violations in tested page states.
-- [ ] Lighthouse runs against the production build and reports Accessibility 100 and Best Practices 100, with saved JSON/HTML and environment details.
-- [ ] Screen reader is checked only if available; otherwise mark it unverified.
-- [ ] Git history uses Conventional Commits; remote repository is public, default branch is main, and the working tree is clean after push.
+- [x] Strict typecheck passes.
+- [x] All 17 unit and component tests pass for sorting, combined filtering and pagination, empty data, ID-preserved selection, all arrow directions, and focus recovery.
+- [x] Production build succeeds.
+- [x] Browser review covers desktop and narrow viewports, sorting, search, pagination, empty state, selection, and keyboard focus.
+- [x] Axe reports zero violations on the populated and no-results states; Lighthouse also passes the contrast audit.
+- [x] Production Lighthouse reports Accessibility 100 and Best Practices 100; JSON, HTML, and environment details are saved.
+- [x] Chrome's accessibility tree was reviewed. Narrator is installed, but spoken interaction could not be checked in this session, so screen-reader speech remains unverified.
+- [x] Git history uses Conventional Commits; the public repository has default branch main, and the working tree is clean after push.
 
