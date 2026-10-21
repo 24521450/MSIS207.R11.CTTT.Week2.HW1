@@ -13,7 +13,7 @@ This work follows the four stages from Lab 2 slide 5: functional slicing, contra
 - [x] Add 18 behavior tests for sort, filter plus pagination, empty results, identity-preserved selection, keyboard movement, focus recovery, and focus transfer at disabled pagination boundaries.
 - [x] Run strict typecheck, test suite, production build, browser review, accessibility checks, and production Lighthouse.
 - [x] Record only observed AI failure modes and their reproduction/evidence/fixes.
-- [x] Complete the README and reports, verify Git hygiene, and push the commit history to main.
+- [x] Complete the follow-up accessibility matrix and manual screen-reader checklist, verify Git hygiene, and push the follow-up commit to main.
 
 ## Stage 2 — Contracts before implementation
 
@@ -96,6 +96,6 @@ Provide exactly 20 deterministic records; id is unique and stable, text columns 
 - [x] Browser review covers desktop and narrow viewports, sorting, search, pagination, empty state, selection, and keyboard focus. Chrome exercised Enter and Space in both directions at the first/last page, waited two animation frames after each update, confirmed focus-visible, and checked Tab/Shift+Tab.
 - [x] Axe reports zero violations on the populated, no-results, and last-page states; Lighthouse also passes the contrast audit.
 - [x] Production Lighthouse reports Accessibility 100 and Best Practices 100; JSON, HTML, and environment details are saved.
-- [x] Chrome's accessibility tree was reviewed. Narrator is installed, but spoken interaction could not be checked in this session, so screen-reader speech remains unverified.
-- [x] Git history uses Conventional Commits; the public repository has default branch main, and the working tree is clean after push.
+- [x] Chrome's accessibility tree was reviewed as supplementary evidence. NVDA is not installed and the user requested that Narrator not be used; real screen-reader speech remains unverified. A manual scenario is saved for later.
+- [x] Git history uses Conventional Commits; the follow-up evidence is pushed to main and remote main matches local HEAD.
 

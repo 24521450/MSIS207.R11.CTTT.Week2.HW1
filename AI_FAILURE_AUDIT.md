@@ -1,6 +1,6 @@
 # AI Failure Audit
 
-Audit date: 2026-10-21. This records errors observed while generating and verifying this project. Each item names the failed attempt, how it was reproduced, the evidence observed, and the correction. These draft/tooling errors were corrected before the final push.
+Audit date: 2026-10-21. This records errors observed while generating and verifying this project. Each item names the failed attempt, how it was reproduced, the evidence observed, and the correction. Items 1–7 were corrected before the initial push. Items 8–10 were found during the follow-up accessibility review and corrected or contained in the follow-up evidence.
 
 ## 1. Vite scaffold command did not create a project in the existing checkout
 
@@ -50,3 +50,24 @@ Audit date: 2026-10-21. This records errors observed while generating and verify
 - **Reproduction/evidence:** On baseline commit `89df459`, use Tab to reach Next on page 1 of 2 and press Enter. Wait until the page indicator reads `Page 2 of 2`, then wait two animation frames. `document.activeElement` was `BODY` while Next was disabled. From page 2, focus Previous and press Enter; after the page indicator returned to `Page 1 of 2` and two animation frames, `document.activeElement` was again `BODY` while Previous was disabled. The captured observations are in [`reports/verification/pagination-focus-before.json`](reports/verification/pagination-focus-before.json).
 - **Risk:** Keyboard and assistive-technology users lost their location after a page change and had no visible focus indicator.
 - **Correction:** When an activated pagination button becomes disabled, the layout effect moves focus to the opposite enabled button. Page updates remain clamped and native disabled buttons cannot activate past either boundary. A component regression test covers Enter and Space both ways. The Chrome regression report confirms all four transitions retain `:focus-visible` after two animation frames and that Tab/Shift+Tab returns through the roving grid cell and enabled pagination control; see [`reports/verification/browser-check.json`](reports/verification/browser-check.json).
+
+## 8. Default search and pagination borders missed non-text contrast
+
+- **Generated defect:** The search field border was `#afc0bb` on white and the enabled page-button border was `#bacbc5` on white. Both provide less than the WCAG 2.2 AA 3:1 non-text contrast needed to identify these controls against the white card surface.
+- **Reproduction/evidence:** Build and serve the production preview, then run `node scripts/audit-accessibility.mjs` with `APP_URL` set to the preview. At source revision `a13e5c9f70fafff1a10fad6e1e43f8626d52a7ef`, the browser computed ratios of 1.90:1 and 1.69:1 respectively. The exact colors and measurements are retained in [`reports/verification/accessibility-audit-before-contrast-fix.json`](reports/verification/accessibility-audit-before-contrast-fix.json).
+- **Risk:** People with low vision may not see where to enter a search or identify the pagination button boundaries in their normal state.
+- **Correction:** Darken only these two default borders to `#7c918a`; keep the existing distinct hover and focus styling. The audit now asserts at least 3:1 for both default boundaries and the page-button hover border. The final measurements are in [`reports/verification/accessibility-audit-final.json`](reports/verification/accessibility-audit-final.json).
+
+## 9. The new accessibility audit initially selected an ambiguous status locator
+
+- **Generated defect:** The first `scripts/audit-accessibility.mjs` draft queried `[role="status"]` as a single node even though the page correctly has both a grid-result status and a callback status.
+- **Reproduction/evidence:** Run the audit with the production preview. The empty-result step failed with Playwright strict-mode error because two elements matched `[role="status"]`; no accessibility result was written by that run.
+- **Risk:** A helper failure could be mistaken for an application accessibility result or stop the requested checks early.
+- **Correction:** Select `.data-grid__status` for the grid result message; keep the callback region separate. The corrected script completes and produces the final JSON report.
+
+## 10. A verification command targeted the wrong local preview
+
+- **Generated mistake:** The PowerShell invocation assigned `APP_URL` without the `$env:` prefix, so the browser scripts ignored it and used their default URL.
+- **Reproduction/evidence:** The failed browser verification inspected `http://127.0.0.1:4173/` and reported the page title `FIFO Audio Queue — MSIS207 HW2` where it expected `Fieldnotes — Team directory`; the audit also failed its initial populated-grid assertion. This happened before either report was written. The invocation and observed output are recorded in [`reports/verification/wrong-preview-command-attempt.md`](reports/verification/wrong-preview-command-attempt.md).
+- **Risk:** Results from the unrelated HW2 app could have been mistaken for HW1 verification.
+- **Correction:** Set `$env:APP_URL='http://127.0.0.1:4178/'` in PowerShell, rerun both scripts, and confirm the result files identify `http://127.0.0.1:4178/` and source commit `55276613bc181f9fe8365778d48b98756d57cbc3`. The corrected outputs are [`reports/verification/browser-check.json`](reports/verification/browser-check.json) and [`reports/verification/accessibility-audit-final.json`](reports/verification/accessibility-audit-final.json).

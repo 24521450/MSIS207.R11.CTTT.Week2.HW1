@@ -1,0 +1,866 @@
+{
+  "scope": "WCAG 2.2 A/AA evidence for the HW1 Data Grid demo; not a conformance claim",
+  "appUrl": "http://127.0.0.1:4178/",
+  "checkedAt": "2026-10-21T16:07:50.712Z",
+  "checks": {
+    "semanticRelationships": {
+      "title": "Fieldnotes — Team directory",
+      "language": "en",
+      "grid": {
+        "tag": "TABLE",
+        "role": "grid",
+        "name": "team directory"
+      },
+      "nativeTableParts": {
+        "thead": true,
+        "tbody": true,
+        "headers": [
+          {
+            "tag": "TH",
+            "scope": "col",
+            "role": "columnheader",
+            "columnIndex": "1",
+            "text": "Team member↕",
+            "sort": null
+          },
+          {
+            "tag": "TH",
+            "scope": "col",
+            "role": "columnheader",
+            "columnIndex": "2",
+            "text": "Department↕",
+            "sort": null
+          },
+          {
+            "tag": "TH",
+            "scope": "col",
+            "role": "columnheader",
+            "columnIndex": "3",
+            "text": "Office↕",
+            "sort": null
+          },
+          {
+            "tag": "TH",
+            "scope": "col",
+            "role": "columnheader",
+            "columnIndex": "4",
+            "text": "Projects↕",
+            "sort": null
+          },
+          {
+            "tag": "TH",
+            "scope": "col",
+            "role": "columnheader",
+            "columnIndex": "5",
+            "text": "Utilization (%)↕",
+            "sort": null
+          }
+        ],
+        "rowRole": "row",
+        "cellRole": "gridcell",
+        "cellColumnIndex": "1",
+        "cellHeaderOrderMatches": true
+      },
+      "search": {
+        "nativeLabel": "Filter team directory",
+        "accessibleDescriptionIds": [
+          "_r_0_-keyboard-help"
+        ],
+        "descriptionText": "Use the arrow keys to move between data cells. Press Enter to select a row or Space to toggle it. Sort buttons work with Enter or Space; Tab moves through the controls normally. If paging disables the current button at an edge, focus moves to the page button that remains enabled. On small screens, scroll the table horizontally."
+      },
+      "status": {
+        "role": "status",
+        "live": "polite",
+        "atomic": "true",
+        "text": "Showing 1 to 10 of 20 records. Page 1 of 2. No row selected."
+      }
+    },
+    "axePopulated": {
+      "passes": 30,
+      "violations": [],
+      "incomplete": [
+        "aria-prohibited-attr",
+        "color-contrast"
+      ]
+    },
+    "accessibilityTreeSupplement": [
+      {
+        "role": "grid",
+        "name": "team directory"
+      },
+      {
+        "role": "status",
+        "name": ""
+      },
+      {
+        "role": "status",
+        "name": ""
+      },
+      {
+        "role": "searchbox",
+        "name": "Filter team directory"
+      },
+      {
+        "role": "row",
+        "name": "Maya Chen Engineering Ho Chi Minh City 4 86",
+        "selected": false
+      },
+      {
+        "role": "row",
+        "name": "Ethan Nguyen Product Da Nang 3 92",
+        "selected": false
+      },
+      {
+        "role": "row",
+        "name": "Sofia Tran Design Ho Chi Minh City 5 78",
+        "selected": false
+      },
+      {
+        "role": "row",
+        "name": "Noah Pham Engineering Hanoi 2 95",
+        "selected": false
+      },
+      {
+        "role": "row",
+        "name": "Amara Le Research Ho Chi Minh City 3 81",
+        "selected": false
+      },
+      {
+        "role": "row",
+        "name": "Lucas Vo Customer success Da Nang 4 88",
+        "selected": false
+      },
+      {
+        "role": "row",
+        "name": "Isabella Do Marketing Hanoi 2 73",
+        "selected": false
+      },
+      {
+        "role": "row",
+        "name": "Gabriel Bui Engineering Ho Chi Minh City 6 90",
+        "selected": false
+      },
+      {
+        "role": "row",
+        "name": "Linh Phan Operations Da Nang 3 84",
+        "selected": false
+      },
+      {
+        "role": "row",
+        "name": "Oliver Ho Product Ho Chi Minh City 4 77",
+        "selected": false
+      },
+      {
+        "role": "row",
+        "name": "Sort by Team member Sort by Department Sort by Office Sort by Projects Sort by Utilization (%)"
+      },
+      {
+        "role": "gridcell",
+        "name": "Maya Chen"
+      },
+      {
+        "role": "gridcell",
+        "name": "Engineering"
+      },
+      {
+        "role": "gridcell",
+        "name": "Ho Chi Minh City"
+      },
+      {
+        "role": "gridcell",
+        "name": "4"
+      },
+      {
+        "role": "gridcell",
+        "name": "86"
+      },
+      {
+        "role": "gridcell",
+        "name": "Ethan Nguyen"
+      },
+      {
+        "role": "gridcell",
+        "name": "Product"
+      },
+      {
+        "role": "gridcell",
+        "name": "Da Nang"
+      },
+      {
+        "role": "gridcell",
+        "name": "3"
+      },
+      {
+        "role": "gridcell",
+        "name": "92"
+      },
+      {
+        "role": "gridcell",
+        "name": "Sofia Tran"
+      },
+      {
+        "role": "gridcell",
+        "name": "Design"
+      },
+      {
+        "role": "gridcell",
+        "name": "Ho Chi Minh City"
+      },
+      {
+        "role": "gridcell",
+        "name": "5"
+      },
+      {
+        "role": "gridcell",
+        "name": "78"
+      }
+    ],
+    "filteredStatus": {
+      "activeElementLabel": "Filter team directory",
+      "rowCount": 6,
+      "page": "Page 1 of 1",
+      "status": "Showing 1 to 6 of 6 records. Page 1 of 1. No row selected."
+    },
+    "axeEmpty": {
+      "passes": 30,
+      "violations": [],
+      "incomplete": [
+        "aria-prohibited-attr",
+        "color-contrast"
+      ]
+    },
+    "emptyStatus": "No records match “no matching record”. Page 1 of 1.",
+    "axeLastPage": {
+      "passes": 30,
+      "violations": [],
+      "incomplete": [
+        "aria-prohibited-attr",
+        "color-contrast"
+      ]
+    },
+    "selectionAndDynamicStatus": {
+      "selectedRows": 1,
+      "status": "Showing 11 to 20 of 20 records. Page 2 of 2. Selected: Anika Vu."
+    },
+    "focusVisibleAndNotObscured": {
+      "tag": "BUTTON",
+      "label": "Sort by Team member",
+      "focusVisible": true,
+      "outline": "rgb(18, 79, 121) solid 3px",
+      "outlineColor": "rgb(18, 79, 121)",
+      "outlineWidth": "3px",
+      "boundsInsideViewport": true,
+      "centerNotCovered": true
+    },
+    "targetSizes": {
+      "minimumWidth": 52.97,
+      "minimumHeight": 44,
+      "belowTwentyFourPixels": [],
+      "samples": [
+        {
+          "tag": "INPUT",
+          "name": "",
+          "width": 390,
+          "height": 46,
+          "disabled": false
+        },
+        {
+          "tag": "BUTTON",
+          "name": "Sort by Team member",
+          "width": 97.42,
+          "height": 44,
+          "disabled": false
+        },
+        {
+          "tag": "BUTTON",
+          "name": "Sort by Department",
+          "width": 89.38,
+          "height": 44,
+          "disabled": false
+        },
+        {
+          "tag": "BUTTON",
+          "name": "Sort by Office",
+          "width": 52.97,
+          "height": 44,
+          "disabled": false
+        },
+        {
+          "tag": "BUTTON",
+          "name": "Sort by Projects",
+          "width": 69.3,
+          "height": 44,
+          "disabled": false
+        },
+        {
+          "tag": "BUTTON",
+          "name": "Sort by Utilization (%)",
+          "width": 107.28,
+          "height": 44,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "Maya Chen",
+          "width": 233.78,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "Engineering",
+          "width": 236.14,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "Ho Chi Minh City",
+          "width": 228.58,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "4",
+          "width": 178,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "86",
+          "width": 251.5,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "Ethan Nguyen",
+          "width": 233.78,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "Product",
+          "width": 236.14,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "Da Nang",
+          "width": 228.58,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "3",
+          "width": 178,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "92",
+          "width": 251.5,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "Sofia Tran",
+          "width": 233.78,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "Design",
+          "width": 236.14,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "Ho Chi Minh City",
+          "width": 228.58,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "5",
+          "width": 178,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "78",
+          "width": 251.5,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "Noah Pham",
+          "width": 233.78,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "Engineering",
+          "width": 236.14,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "Hanoi",
+          "width": 228.58,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "2",
+          "width": 178,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "95",
+          "width": 251.5,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "Amara Le",
+          "width": 233.78,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "Research",
+          "width": 236.14,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "Ho Chi Minh City",
+          "width": 228.58,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "3",
+          "width": 178,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "81",
+          "width": 251.5,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "Lucas Vo",
+          "width": 233.78,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "Customer success",
+          "width": 236.14,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "Da Nang",
+          "width": 228.58,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "4",
+          "width": 178,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "88",
+          "width": 251.5,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "Isabella Do",
+          "width": 233.78,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "Marketing",
+          "width": 236.14,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "Hanoi",
+          "width": 228.58,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "2",
+          "width": 178,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "73",
+          "width": 251.5,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "Gabriel Bui",
+          "width": 233.78,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "Engineering",
+          "width": 236.14,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "Ho Chi Minh City",
+          "width": 228.58,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "6",
+          "width": 178,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "90",
+          "width": 251.5,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "Linh Phan",
+          "width": 233.78,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "Operations",
+          "width": 236.14,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "Da Nang",
+          "width": 228.58,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "3",
+          "width": 178,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "84",
+          "width": 251.5,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "Oliver Ho",
+          "width": 233.78,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "Product",
+          "width": 236.14,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "Ho Chi Minh City",
+          "width": 228.58,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "4",
+          "width": 178,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "TD",
+          "name": "77",
+          "width": 251.5,
+          "height": 54,
+          "disabled": false
+        },
+        {
+          "tag": "BUTTON",
+          "name": "Go to previous page",
+          "width": 90.75,
+          "height": 44,
+          "disabled": true
+        },
+        {
+          "tag": "BUTTON",
+          "name": "Go to next page",
+          "width": 69.64,
+          "height": 44,
+          "disabled": false
+        }
+      ]
+    },
+    "contrast": {
+      "textSamples": [
+        {
+          "label": "Intro description over base page surface",
+          "foreground": "rgb(68, 91, 99)",
+          "background": "rgb(245, 246, 243)",
+          "border": "rgb(68, 91, 99)",
+          "outline": "rgb(68, 91, 99)",
+          "ratio": 6.62
+        },
+        {
+          "label": "Search label",
+          "foreground": "rgb(20, 41, 48)",
+          "background": "rgb(255, 255, 255)",
+          "border": "rgb(20, 41, 48)",
+          "outline": "rgb(20, 41, 48)",
+          "ratio": 15.11
+        },
+        {
+          "label": "Keyboard instructions",
+          "foreground": "rgb(75, 96, 104)",
+          "background": "rgb(255, 255, 255)",
+          "border": "rgb(75, 96, 104)",
+          "outline": "rgb(75, 96, 104)",
+          "ratio": 6.62
+        },
+        {
+          "label": "Search input value",
+          "foreground": "rgb(20, 41, 48)",
+          "background": "rgb(255, 255, 255)",
+          "border": "rgb(124, 145, 138)",
+          "outline": "rgb(20, 41, 48)",
+          "ratio": 15.11
+        },
+        {
+          "label": "Search placeholder",
+          "foreground": "rgb(91, 109, 115)",
+          "background": "rgb(255, 255, 255)",
+          "border": "rgb(124, 145, 138)",
+          "outline": "rgb(20, 41, 48)",
+          "ratio": 5.41
+        },
+        {
+          "label": "Column header",
+          "foreground": "rgb(63, 85, 93)",
+          "background": "rgb(242, 246, 243)",
+          "border": "rgb(63, 85, 93)",
+          "outline": "rgb(63, 85, 93)",
+          "ratio": 7.21
+        },
+        {
+          "label": "Data cell",
+          "foreground": "rgb(41, 62, 70)",
+          "background": "rgb(255, 255, 255)",
+          "border": "rgb(41, 62, 70)",
+          "outline": "rgb(41, 62, 70)",
+          "ratio": 11.22
+        },
+        {
+          "label": "Live status",
+          "foreground": "rgb(64, 87, 95)",
+          "background": "rgb(255, 255, 255)",
+          "border": "rgb(64, 87, 95)",
+          "outline": "rgb(64, 87, 95)",
+          "ratio": 7.65
+        },
+        {
+          "label": "Pagination button",
+          "foreground": "rgb(32, 59, 65)",
+          "background": "rgb(255, 255, 255)",
+          "border": "rgb(124, 145, 138)",
+          "outline": "rgb(32, 59, 65)",
+          "ratio": 11.91
+        },
+        {
+          "label": "Sort button hover",
+          "foreground": "rgb(11, 89, 82)",
+          "background": "rgb(242, 246, 243)",
+          "border": "rgb(11, 89, 82)",
+          "outline": "rgb(18, 79, 121)",
+          "ratio": 7.51
+        },
+        {
+          "label": "Pagination button hover",
+          "foreground": "rgb(32, 59, 65)",
+          "background": "rgb(241, 247, 244)",
+          "border": "rgb(102, 140, 131)",
+          "outline": "rgb(32, 59, 65)",
+          "ratio": 10.97
+        },
+        {
+          "label": "Selected row text",
+          "foreground": "rgb(23, 59, 56)",
+          "background": "rgb(234, 244, 239)",
+          "border": "rgb(23, 59, 56)",
+          "outline": "rgb(18, 79, 121)",
+          "ratio": 10.87
+        },
+        {
+          "label": "Selected badge text",
+          "foreground": "rgb(22, 78, 68)",
+          "background": "rgb(248, 252, 249)",
+          "border": "rgb(177, 209, 196)",
+          "outline": "rgb(22, 78, 68)",
+          "ratio": 9.19
+        },
+        {
+          "label": "Active sort indicator",
+          "foreground": "rgb(56, 92, 88)",
+          "background": "rgb(242, 246, 243)",
+          "border": "rgb(56, 92, 88)",
+          "outline": "rgb(56, 92, 88)",
+          "ratio": 6.78
+        }
+      ],
+      "minimumTextRatio": 5.41,
+      "textSamplesAtLeastFourPointFive": true,
+      "focusRing": {
+        "focusedRole": "BUTTON",
+        "outlineColor": "rgb(18, 79, 121)",
+        "outlineWidth": "3px",
+        "visible": true,
+        "adjacentBackground": "rgb(242, 246, 243)"
+      },
+      "focusRingOnWhiteRatio": 8.68,
+      "focusRingOnAdjacentRatio": 7.95,
+      "components": {
+        "searchBorder": {
+          "color": "rgb(124, 145, 138)",
+          "background": "rgb(255, 255, 255)",
+          "ratioAgainstFill": 3.35
+        },
+        "paginationBorder": {
+          "color": "rgb(124, 145, 138)",
+          "background": "rgb(255, 255, 255)",
+          "ratioAgainstFill": 3.35
+        },
+        "selectedCue": "✓ Selected",
+        "sortCue": "↓",
+        "paginationHoverBorderRatio": 3.43
+      },
+      "sortingState": {
+        "ascendingSort": {
+          "sort": "ascending",
+          "pressed": "true",
+          "indicator": "↑"
+        },
+        "descendingSort": {
+          "sort": "descending",
+          "pressed": "true",
+          "indicator": "↓"
+        }
+      }
+    },
+    "reflowAt320CssPixels": {
+      "viewportWidth": 320,
+      "documentWidth": 320,
+      "tableViewportWidth": 252,
+      "tableContentWidth": 760
+    },
+    "longContentStress": {
+      "method": "Injected a long unbroken string into an existing production-preview cell to stress rendered table layout; this is a visual CSS check, not an application data-path test.",
+      "injectedCharacters": 300,
+      "viewportWidth": 320,
+      "documentWidth": 320,
+      "tableViewportWidth": 252,
+      "tableContentWidth": 2412
+    },
+    "textSpacingOverride": {
+      "viewportWidth": 320,
+      "documentWidth": 320,
+      "tableViewportWidth": 252,
+      "tableContentWidth": 760,
+      "instructionsLineHeight": "16.5px"
+    },
+    "twoHundredPercentZoomEquivalent": {
+      "method": "720 CSS-pixel viewport at DPR 2, matching the layout viewport produced by 200% zoom from a 1440 CSS-pixel wide window; browser chrome zoom control was not automated.",
+      "viewportCssWidth": 720,
+      "documentCssWidth": 720,
+      "devicePixelRatio": 2,
+      "tableViewportWidth": 624,
+      "tableContentWidth": 760
+    },
+    "runtimeErrors": {
+      "pageErrors": [],
+      "consoleErrors": []
+    }
+  },
+  "environment": {
+    "platform": "win32",
+    "osRelease": "10.0.26300",
+    "node": "v24.15.0",
+    "browser": "155.0.8059.85",
+    "axeCore": "^4.14.0",
+    "playwright": "^1.64.1",
+    "sourceRevision": "55276613bc181f9fe8365778d48b98756d57cbc3",
+    "appUrl": "http://127.0.0.1:4178/"
+  }
+}
