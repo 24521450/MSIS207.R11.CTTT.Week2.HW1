@@ -1,0 +1,23 @@
+{
+  "capturedAgainstCommit": "89df459",
+  "environment": {
+    "browser": "Chrome 155.0.8059.85",
+    "target": "http://127.0.0.1:4173/",
+    "build": "Vite production preview"
+  },
+  "settleCondition": "Wait for the page indicator to update, then wait two requestAnimationFrame callbacks.",
+  "observations": [
+    {
+      "action": "On Page 1 of 2, focus Next and press Enter.",
+      "pageAfterUpdate": "Page 2 of 2",
+      "activeElementTag": "BODY",
+      "nextDisabled": true
+    },
+    {
+      "action": "On Page 2 of 2, focus Previous and press Enter.",
+      "pageAfterUpdate": "Page 1 of 2",
+      "activeElementTag": "BODY",
+      "previousDisabled": true
+    }
+  ]
+}

@@ -55,6 +55,83 @@
     "spaceClearedSelection": true,
     "callbackAnnounced": true
   },
+  "paginationFocus": {
+    "tabStepsToNext": 7,
+    "transitions": [
+      {
+        "action": "Enter on Next",
+        "tagName": "BUTTON",
+        "label": "Go to previous page",
+        "focusVisible": true
+      },
+      {
+        "action": "Space on Previous",
+        "tagName": "BUTTON",
+        "label": "Go to next page",
+        "focusVisible": true
+      },
+      {
+        "action": "Space on Next",
+        "tagName": "BUTTON",
+        "label": "Go to previous page",
+        "focusVisible": true
+      },
+      {
+        "action": "Enter on Previous",
+        "tagName": "BUTTON",
+        "label": "Go to next page",
+        "focusVisible": true
+      }
+    ],
+    "tabSequence": {
+      "lastPage": [
+        "Previous",
+        "Shift+Tab to roving data cell",
+        "Tab to Previous"
+      ],
+      "firstPage": [
+        "Next",
+        "Shift+Tab to roving data cell",
+        "Tab to Next"
+      ],
+      "shiftTabAtLastPage": {
+        "tagName": "TD",
+        "role": "gridcell",
+        "label": "Anika Vu",
+        "focusVisible": true
+      },
+      "tabToPrevious": {
+        "tagName": "BUTTON",
+        "label": "Go to previous page",
+        "focusVisible": true
+      },
+      "shiftTabAtFirstPage": {
+        "tagName": "TD",
+        "role": "gridcell",
+        "label": "Maya Chen",
+        "focusVisible": true
+      },
+      "tabToNext": {
+        "tagName": "BUTTON",
+        "label": "Go to next page",
+        "focusVisible": true
+      }
+    },
+    "boundaryControlsRejectActivation": true,
+    "axeLastPage": {
+      "passes": 30,
+      "violations": [],
+      "incomplete": [
+        "aria-prohibited-attr",
+        "color-contrast"
+      ]
+    },
+    "focusSampledAfterTwoAnimationFrames": true,
+    "focusScreenshots": [
+      "pagination-focus-page-2.png",
+      "pagination-focus-page-1.png"
+    ]
+  },
   "browserErrors": {
     "pageErrors": [],
     "consoleErrors": []
@@ -64,7 +141,7 @@
     "osRelease": "10.0.26300",
     "node": "v24.15.0",
     "browser": "155.0.8059.85",
-    "appUrl": "http://127.0.0.1:4173/",
-    "checkedAt": "2026-10-21T08:03:59.328Z"
+    "appUrl": "http://127.0.0.1:4174/",
+    "checkedAt": "2026-10-21T08:39:27.617Z"
   }
 }

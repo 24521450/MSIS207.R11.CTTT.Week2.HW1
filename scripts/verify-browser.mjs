@@ -45,6 +45,75 @@ async function runAxe(page) {
   })
 }
 
+async function waitForPaginationFocus(page, expectedPage, expectedLabel) {
+  await page.waitForFunction(
+    ({ pageText, label }) =>
+      document.querySelector('.data-grid__page-number')?.textContent === pageText &&
+      document.activeElement?.getAttribute('aria-label') === label,
+    { pageText: expectedPage, label: expectedLabel },
+    { polling: 'raf', timeout: 5000 },
+  )
+  await page.evaluate(
+    () =>
+      new Promise((resolve) =>
+        requestAnimationFrame(() => requestAnimationFrame(resolve)),
+      ),
+  )
+
+  const focus = await page.evaluate(() => ({
+    tagName: document.activeElement?.tagName ?? null,
+    label: document.activeElement?.getAttribute('aria-label') ?? null,
+    focusVisible: document.activeElement?.matches(':focus-visible') ?? false,
+  }))
+  assert.equal(focus.label, expectedLabel)
+  assert.equal(focus.focusVisible, true, 'Keyboard focus indicator must remain visible')
+  return focus
+}
+
+async function waitForControlFocus(page, expectedLabel) {
+  await page.waitForFunction(
+    (label) => document.activeElement?.getAttribute('aria-label') === label,
+    expectedLabel,
+    { polling: 'raf', timeout: 3000 },
+  )
+  await page.evaluate(
+    () =>
+      new Promise((resolve) =>
+        requestAnimationFrame(() => requestAnimationFrame(resolve)),
+      ),
+  )
+  const focus = await page.evaluate(() => ({
+    tagName: document.activeElement?.tagName ?? null,
+    label: document.activeElement?.getAttribute('aria-label') ?? null,
+    focusVisible: document.activeElement?.matches(':focus-visible') ?? false,
+  }))
+  assert.equal(focus.focusVisible, true, 'Keyboard focus indicator must remain visible')
+  return focus
+}
+
+async function waitForGridCellFocus(page) {
+  await page.waitForFunction(
+    () => document.activeElement?.getAttribute('role') === 'gridcell',
+    undefined,
+    { polling: 'raf', timeout: 3000 },
+  )
+  await page.evaluate(
+    () =>
+      new Promise((resolve) =>
+        requestAnimationFrame(() => requestAnimationFrame(resolve)),
+      ),
+  )
+  const focus = await page.evaluate(() => ({
+    tagName: document.activeElement?.tagName ?? null,
+    role: document.activeElement?.getAttribute('role') ?? null,
+    label: document.activeElement?.textContent?.trim() ?? null,
+    focusVisible: document.activeElement?.matches(':focus-visible') ?? false,
+  }))
+  assert.equal(focus.role, 'gridcell')
+  assert.equal(focus.focusVisible, true, 'Keyboard focus indicator must remain visible')
+  return focus
+}
+
 try {
   await mkdir(outputDir, { recursive: true })
   const page = await browser.newPage({
@@ -180,6 +249,98 @@ try {
     enterSelected: selectedName,
     spaceClearedSelection: true,
     callbackAnnounced: true,
+  }
+
+  await page.reload({ waitUntil: 'networkidle' })
+  await page.addScriptTag({ content: axeSource })
+  const paginationSearch = page.getByRole('searchbox', { name: 'Filter team directory' })
+  await paginationSearch.focus()
+  let tabSteps = 0
+  while (
+    (await page.evaluate(() => document.activeElement?.getAttribute('aria-label'))) !==
+      'Go to next page' &&
+    tabSteps < 20
+  ) {
+    await page.keyboard.press('Tab')
+    tabSteps += 1
+  }
+  assert.equal(
+    await page.evaluate(() => document.activeElement?.getAttribute('aria-label')),
+    'Go to next page',
+    'Tab should reach Next through the normal control order',
+  )
+  assert.equal(
+    await page.evaluate(() => document.activeElement?.matches(':focus-visible')),
+    true,
+  )
+
+  const paginationTransitions = []
+  await page.keyboard.press('Enter')
+  paginationTransitions.push({
+    action: 'Enter on Next',
+    ...await waitForPaginationFocus(page, 'Page 2 of 2', 'Go to previous page'),
+  })
+  await page.locator('.data-grid__pagination').scrollIntoViewIfNeeded()
+  await page.screenshot({
+    path: resolve(outputDir, 'pagination-focus-page-2.png'),
+  })
+  assert.equal(await page.getByRole('button', { name: 'Go to next page' }).isDisabled(), true)
+  const pageTwoAxe = await runAxe(page)
+  assert.deepEqual(pageTwoAxe.violations, [], 'Last page must pass axe WCAG 2.2 AA checks')
+
+  await page.keyboard.press('Shift+Tab')
+  const shiftTabAtLastPage = await waitForGridCellFocus(page)
+  await page.keyboard.press('Tab')
+  const tabToPrevious = await waitForControlFocus(page, 'Go to previous page')
+  await page.keyboard.press('Space')
+  paginationTransitions.push({
+    action: 'Space on Previous',
+    ...await waitForPaginationFocus(page, 'Page 1 of 2', 'Go to next page'),
+  })
+  await page.locator('.data-grid__pagination').scrollIntoViewIfNeeded()
+  await page.screenshot({
+    path: resolve(outputDir, 'pagination-focus-page-1.png'),
+  })
+  assert.equal(await page.getByRole('button', { name: 'Go to previous page' }).isDisabled(), true)
+  await page.getByRole('button', { name: 'Go to previous page' }).evaluate((button) => button.click())
+  assert.equal(await page.locator('.data-grid__page-number').innerText(), 'Page 1 of 2')
+
+  await page.keyboard.press('Shift+Tab')
+  const shiftTabAtFirstPage = await waitForGridCellFocus(page)
+  await page.keyboard.press('Tab')
+  const tabToNext = await waitForControlFocus(page, 'Go to next page')
+  await page.keyboard.press('Space')
+  paginationTransitions.push({
+    action: 'Space on Next',
+    ...await waitForPaginationFocus(page, 'Page 2 of 2', 'Go to previous page'),
+  })
+  await page.keyboard.press('Enter')
+  paginationTransitions.push({
+    action: 'Enter on Previous',
+    ...await waitForPaginationFocus(page, 'Page 1 of 2', 'Go to next page'),
+  })
+  assert.equal(await page.getByRole('button', { name: 'Go to previous page' }).isDisabled(), true)
+  await page.getByRole('button', { name: 'Go to previous page' }).evaluate((button) => button.click())
+  assert.equal(await page.locator('.data-grid__page-number').innerText(), 'Page 1 of 2')
+
+  checkResults.paginationFocus = {
+    tabStepsToNext: tabSteps,
+    transitions: paginationTransitions,
+    tabSequence: {
+      lastPage: ['Previous', 'Shift+Tab to roving data cell', 'Tab to Previous'],
+      firstPage: ['Next', 'Shift+Tab to roving data cell', 'Tab to Next'],
+      shiftTabAtLastPage,
+      tabToPrevious,
+      shiftTabAtFirstPage,
+      tabToNext,
+    },
+    boundaryControlsRejectActivation: true,
+    axeLastPage: pageTwoAxe,
+    focusSampledAfterTwoAnimationFrames: true,
+    focusScreenshots: [
+      'pagination-focus-page-2.png',
+      'pagination-focus-page-1.png',
+    ],
   }
 
   assert.deepEqual(pageErrors, [])

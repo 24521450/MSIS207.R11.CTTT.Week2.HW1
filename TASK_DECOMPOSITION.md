@@ -10,7 +10,7 @@ This work follows the four stages from Lab 2 slide 5: functional slicing, contra
 - [x] Define and implement pure data operations: search, typed comparison, sorting, page clamping, and pagination.
 - [x] Define and implement the accessible grid: native table markup, ARIA roles, sort buttons, stable IDs, selection, roving tabindex, keyboard movement, and focus recovery.
 - [x] Define and implement the 20-row local demo and polished responsive page.
-- [x] Add behavior tests for sort, filter plus pagination, empty results, identity-preserved selection, keyboard movement, and focus recovery.
+- [x] Add 18 behavior tests for sort, filter plus pagination, empty results, identity-preserved selection, keyboard movement, focus recovery, and focus transfer at disabled pagination boundaries.
 - [x] Run strict typecheck, test suite, production build, browser review, accessibility checks, and production Lighthouse.
 - [x] Record only observed AI failure modes and their reproduction/evidence/fixes.
 - [x] Complete the README and reports, verify Git hygiene, and push the commit history to main.
@@ -87,10 +87,10 @@ Provide exactly 20 deterministic records; id is unique and stable, text columns 
 ## Stage 4 — Independent verification
 
 - [x] Strict typecheck passes.
-- [x] All 17 unit and component tests pass for sorting, combined filtering and pagination, empty data, ID-preserved selection, all arrow directions, and focus recovery.
+- [x] All 18 unit and component tests pass for sorting, combined filtering and pagination, empty data, ID-preserved selection, all arrow directions, and pagination-boundary focus transfer.
 - [x] Production build succeeds.
-- [x] Browser review covers desktop and narrow viewports, sorting, search, pagination, empty state, selection, and keyboard focus.
-- [x] Axe reports zero violations on the populated and no-results states; Lighthouse also passes the contrast audit.
+- [x] Browser review covers desktop and narrow viewports, sorting, search, pagination, empty state, selection, and keyboard focus. Chrome exercised Enter and Space in both directions at the first/last page, waited two animation frames after each update, confirmed focus-visible, and checked Tab/Shift+Tab.
+- [x] Axe reports zero violations on the populated, no-results, and last-page states; Lighthouse also passes the contrast audit.
 - [x] Production Lighthouse reports Accessibility 100 and Best Practices 100; JSON, HTML, and environment details are saved.
 - [x] Chrome's accessibility tree was reviewed. Narrator is installed, but spoken interaction could not be checked in this session, so screen-reader speech remains unverified.
 - [x] Git history uses Conventional Commits; the public repository has default branch main, and the working tree is clean after push.

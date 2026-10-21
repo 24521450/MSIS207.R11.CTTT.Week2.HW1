@@ -80,6 +80,35 @@ describe('DataGrid', () => {
     expect(within(visibleRows[1]!).getByRole('gridcell', { name: 'Member 01' })).toBeInTheDocument()
   })
 
+  it('moves focus to the remaining pagination control when an edge button disables', async () => {
+    const user = userEvent.setup()
+    renderGrid(makeEntries(20))
+
+    const previous = screen.getByRole('button', { name: 'Go to previous page' })
+    const next = screen.getByRole('button', { name: 'Go to next page' })
+    next.focus()
+    await user.keyboard('{Enter}')
+
+    expect(screen.getByText('Page 2 of 2')).toBeInTheDocument()
+    expect(next).toBeDisabled()
+    expect(previous).toHaveFocus()
+
+    await user.keyboard(' ')
+    expect(screen.getByText('Page 1 of 2')).toBeInTheDocument()
+    expect(previous).toBeDisabled()
+    expect(next).toHaveFocus()
+
+    await user.keyboard(' ')
+    expect(screen.getByText('Page 2 of 2')).toBeInTheDocument()
+    expect(next).toBeDisabled()
+    expect(previous).toHaveFocus()
+
+    await user.keyboard('{Enter}')
+    expect(screen.getByText('Page 1 of 2')).toBeInTheDocument()
+    expect(previous).toBeDisabled()
+    expect(next).toHaveFocus()
+  })
+
   it('shows a clear empty result and keeps search available', async () => {
     const user = userEvent.setup()
     renderGrid()

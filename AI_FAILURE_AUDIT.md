@@ -43,3 +43,10 @@ Audit date: 2026-10-21. This records errors observed while generating and verify
 - **Reproduction/evidence:** `npm run typecheck`, `npm test`, and `npm run lint` all stopped on duplicate declarations before the new browser checks ran.
 - **Risk:** The added keyboard coverage would not run, so a required direction could appear tested in source while the test suite failed to compile.
 - **Correction:** Renamed the new bindings to `firstVisibleRow` and `firstVisibleName`; the corrected typecheck, lint, and test suite then passed.
+
+## 7. Pagination dropped keyboard focus when its active button became disabled
+
+- **Generated defect:** The pagination handler changed the page while focus remained on the activated native button. At either edge, the resulting render disabled that button, and Chrome removed it from focus without moving focus elsewhere.
+- **Reproduction/evidence:** On baseline commit `89df459`, use Tab to reach Next on page 1 of 2 and press Enter. Wait until the page indicator reads `Page 2 of 2`, then wait two animation frames. `document.activeElement` was `BODY` while Next was disabled. From page 2, focus Previous and press Enter; after the page indicator returned to `Page 1 of 2` and two animation frames, `document.activeElement` was again `BODY` while Previous was disabled. The captured observations are in [`reports/verification/pagination-focus-before.json`](reports/verification/pagination-focus-before.json).
+- **Risk:** Keyboard and assistive-technology users lost their location after a page change and had no visible focus indicator.
+- **Correction:** When an activated pagination button becomes disabled, the layout effect moves focus to the opposite enabled button. Page updates remain clamped and native disabled buttons cannot activate past either boundary. A component regression test covers Enter and Space both ways. The Chrome regression report confirms all four transitions retain `:focus-visible` after two animation frames and that Tab/Shift+Tab returns through the roving grid cell and enabled pagination control; see [`reports/verification/browser-check.json`](reports/verification/browser-check.json).

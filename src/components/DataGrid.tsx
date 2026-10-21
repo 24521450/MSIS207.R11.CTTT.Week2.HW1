@@ -44,6 +44,9 @@ export function DataGrid<T>({
   const cellElements = useRef(new Map<string, HTMLTableCellElement>())
   const focusedCellKey = useRef<string | null>(null)
   const searchInput = useRef<HTMLInputElement>(null)
+  const previousPageButton = useRef<HTMLButtonElement>(null)
+  const nextPageButton = useRef<HTMLButtonElement>(null)
+  const pendingPaginationFocus = useRef<'previous' | 'next' | null>(null)
   const id = useId()
   const instructionsId = id + '-keyboard-help'
   const statusId = id + '-result-status'
@@ -96,6 +99,45 @@ export function DataGrid<T>({
     [page, sortedRows],
   )
   const visibleRows = pageResult.rows
+
+  const requestPageChange = useCallback(
+    (direction: 'previous' | 'next') => {
+      const activeButton =
+        direction === 'previous'
+          ? previousPageButton.current
+          : nextPageButton.current
+      pendingPaginationFocus.current =
+        document.activeElement === activeButton ? direction : null
+
+      setPage((current) =>
+        direction === 'previous'
+          ? Math.max(1, current - 1)
+          : Math.min(pageResult.pageCount, current + 1),
+      )
+    },
+    [pageResult.pageCount],
+  )
+
+  useLayoutEffect(() => {
+    const direction = pendingPaginationFocus.current
+    if (direction === null) return
+
+    const activatedButton =
+      direction === 'previous'
+        ? previousPageButton.current
+        : nextPageButton.current
+    if (activatedButton?.disabled) {
+      const availableButton =
+        direction === 'previous'
+          ? nextPageButton.current
+          : previousPageButton.current
+      if (availableButton && !availableButton.disabled) {
+        availableButton.focus()
+      }
+    }
+
+    pendingPaginationFocus.current = null
+  }, [pageResult.page])
 
   const isCellVisible = useCallback(
     (cell: ActiveCell<T> | null): boolean => {
@@ -327,7 +369,9 @@ export function DataGrid<T>({
       <p id={instructionsId} className="data-grid__instructions">
         Use the arrow keys to move between data cells. Press Enter to select a
         row or Space to toggle it. Sort buttons work with Enter or Space; Tab
-        moves through the controls normally. On small screens, scroll the table horizontally.
+        moves through the controls normally. If paging disables the current
+        button at an edge, focus moves to the page button that remains enabled.
+        On small screens, scroll the table horizontally.
       </p>
 
       <div className="data-grid__table-wrap">
@@ -486,9 +530,10 @@ export function DataGrid<T>({
           aria-label={ariaLabel + ' pagination'}
         >
           <button
+            ref={previousPageButton}
             type="button"
             className="data-grid__page-button"
-            onClick={() => setPage((current) => Math.max(1, current - 1))}
+            onClick={() => requestPageChange('previous')}
             disabled={pageResult.page <= 1}
             aria-label="Go to previous page"
           >
@@ -499,13 +544,10 @@ export function DataGrid<T>({
             Page {pageResult.page} of {pageResult.pageCount}
           </span>
           <button
+            ref={nextPageButton}
             type="button"
             className="data-grid__page-button"
-            onClick={() =>
-              setPage((current) =>
-                Math.min(pageResult.pageCount, current + 1),
-              )
-            }
+            onClick={() => requestPageChange('next')}
             disabled={pageResult.page >= pageResult.pageCount}
             aria-label="Go to next page"
           >
