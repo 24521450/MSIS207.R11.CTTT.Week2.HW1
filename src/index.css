@@ -426,7 +426,7 @@ a {
   width: 100%;
   min-height: 46px;
   padding: 10px 14px 10px 42px;
-  border: 1px solid #afc0bb;
+  border: 1px solid #7c918a;
   border-radius: 9px;
   color: var(--ink-strong);
   background: #fff;
@@ -611,7 +611,7 @@ a {
   justify-content: center;
   gap: 8px;
   padding: 0 11px;
-  border: 1px solid #bacbc5;
+  border: 1px solid #7c918a;
   border-radius: 8px;
   color: #203b41;
   background: #fff;

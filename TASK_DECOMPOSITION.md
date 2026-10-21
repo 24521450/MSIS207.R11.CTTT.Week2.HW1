@@ -68,6 +68,10 @@ The model must compare numbers numerically, compare text with a stable locale-aw
 
 Provide exactly 20 deterministic records; id is unique and stable, text columns support filtering, and numeric columns prove numeric sorting.
 
+### Accessibility audit script — contract before audit implementation
+
+`scripts/audit-accessibility.mjs` accepts `APP_URL` for a built production preview and writes a machine-readable record plus screenshots under `reports/verification/`. It independently checks the applicable visual and DOM-level criteria: the 320 CSS-pixel reflow case with a table-only horizontal scroller, text-spacing overrides, normal/hover/focus/selected contrast samples, focus visibility and viewport exposure, target dimensions, semantic names/roles/states, status updates, and a long-content layout stress case. Its axe checks cover populated, empty, and last-page states. It records browser/runtime versions and the tested source revision. The accessibility tree is supplementary evidence only; this script must never claim actual screen-reader speech or full WCAG conformance.
+
 ### Visual system — establish before CSS implementation
 
 - Responsive content container with clear heading, short summary, labelled search, data table, pagination, selected-item feedback, and keyboard instructions.
