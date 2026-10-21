@@ -41,8 +41,6 @@ export function DataGrid<T>({
   ariaLabel,
   getRowId,
 }: DataGridProps<T>) {
-  const generatedIds = useRef(new WeakMap<object, string>())
-  const nextGeneratedId = useRef(0)
   const cellElements = useRef(new Map<string, HTMLTableCellElement>())
   const focusedCellKey = useRef<string | null>(null)
   const searchInput = useRef<HTMLInputElement>(null)
@@ -71,40 +69,19 @@ export function DataGrid<T>({
         return 'id:' + typeof itemId + ':' + String(itemId)
       }
 
-      const objectItem = item as object
-      const existingId = generatedIds.current.get(objectItem)
-      if (existingId) return existingId
-
-      nextGeneratedId.current += 1
-      const stableId = 'object:' + nextGeneratedId.current
-      generatedIds.current.set(objectItem, stableId)
-      return stableId
+      throw new TypeError(
+        'DataGrid rows without a string or number id must provide getRowId.',
+      )
     },
     [getRowId],
   )
 
-  const allRowIds = useMemo(
-    () => data.map((item) => resolveRowId(item)),
-    [data, resolveRowId],
-  )
+  const allRowIds = data.map((item) => resolveRowId(item))
   if (new Set(allRowIds).size !== allRowIds.length) {
     throw new Error('DataGrid requires a unique stable row ID for every row.')
   }
 
-  const rowIdByItem = useMemo(
-    () =>
-      new Map(
-        data.map((item, index) => [
-          item,
-          allRowIds[index] ?? resolveRowId(item),
-        ] as const),
-      ),
-    [allRowIds, data, resolveRowId],
-  )
-  const rowIdFor = useCallback(
-    (item: T): string => rowIdByItem.get(item) ?? resolveRowId(item),
-    [resolveRowId, rowIdByItem],
-  )
+  const rowIdFor = resolveRowId
 
   const filteredRows = useMemo(
     () => filterRows(data, query, columns),
@@ -130,34 +107,39 @@ export function DataGrid<T>({
     [columns, rowIdFor, visibleRows],
   )
 
+  const firstVisibleRow = visibleRows[0]
+  const firstColumn = columns[0]
+  const replacementCell = useMemo<ActiveCell<T> | null>(
+    () =>
+      firstVisibleRow && firstColumn
+        ? {
+            rowId: rowIdFor(firstVisibleRow),
+            columnKey: firstColumn.accessorKey,
+          }
+        : null,
+    [firstColumn, firstVisibleRow, rowIdFor],
+  )
+  const visibleActiveCell = isCellVisible(activeCell)
+    ? activeCell
+    : replacementCell
+
   useLayoutEffect(() => {
     if (isCellVisible(activeCell)) return
 
-    const firstRow = visibleRows[0]
-    const firstColumn = columns[0]
-    if (!firstRow || !firstColumn) {
-      setActiveCell(null)
-      if (focusedCellKey.current !== null) {
-        searchInput.current?.focus()
-        focusedCellKey.current = null
-      }
+    if (focusedCellKey.current === null) return
+
+    if (!replacementCell) {
+      searchInput.current?.focus()
+      focusedCellKey.current = null
       return
     }
 
-    const replacement: ActiveCell<T> = {
-      rowId: rowIdFor(firstRow),
-      columnKey: firstColumn.accessorKey,
-    }
-    setActiveCell(replacement)
-
-    if (focusedCellKey.current !== null) {
-      const replacementKey = cellReferenceKey(
-        replacement.rowId,
-        replacement.columnKey,
-      )
-      cellElements.current.get(replacementKey)?.focus()
-    }
-  }, [activeCell, columns, isCellVisible, rowIdFor, visibleRows])
+    const replacementKey = cellReferenceKey(
+      replacementCell.rowId,
+      replacementCell.columnKey,
+    )
+    cellElements.current.get(replacementKey)?.focus()
+  }, [activeCell, isCellVisible, replacementCell])
 
   const handleSort = useCallback((columnKey: keyof T) => {
     setSort((current) => {
@@ -422,8 +404,8 @@ export function DataGrid<T>({
                         column.accessorKey,
                       )
                       const isActive =
-                        activeCell?.rowId === rowId &&
-                        activeCell.columnKey === column.accessorKey
+                        visibleActiveCell?.rowId === rowId &&
+                        visibleActiveCell.columnKey === column.accessorKey
 
                       return (
                         <td

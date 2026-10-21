@@ -54,6 +54,7 @@ describe('DataGrid', () => {
     expect(screen.getAllByRole('row')).toHaveLength(11)
     expect(screen.getAllByRole('gridcell')).toHaveLength(30)
     expect(screen.getAllByRole('gridcell').filter((cell) => cell.tabIndex === 0)).toHaveLength(1)
+    expect(screen.getAllByRole('gridcell')[0]).toHaveAttribute('tabindex', '0')
     expect(screen.getByRole('columnheader', { name: /Name/ })).toHaveAttribute('scope', 'col')
     expect(screen.getByText('Page 1 of 3')).toBeInTheDocument()
   })
@@ -129,6 +130,14 @@ describe('DataGrid', () => {
 
     await user.keyboard('{ArrowLeft}')
     const secondName = within(focusedSecondRow).getAllByRole('gridcell')[0]!
+    expect(secondName).toHaveFocus()
+
+    await user.keyboard('{ArrowUp}')
+    const firstVisibleRow = screen.getAllByRole('row')[1]!
+    const firstVisibleName = within(firstVisibleRow).getAllByRole('gridcell')[0]!
+    expect(firstVisibleName).toHaveFocus()
+
+    await user.keyboard('{ArrowDown}')
     expect(secondName).toHaveFocus()
 
     await user.keyboard('{Enter}')
@@ -235,6 +244,29 @@ describe('DataGrid', () => {
 
     expect(screen.getByRole('searchbox', { name: 'Filter team directory' })).toHaveFocus()
     expect(screen.getByText('There are no records to display.')).toBeInTheDocument()
+  })
+
+  it('uses stable string IDs when getRowId is omitted', async () => {
+    const user = userEvent.setup()
+    const data = makeEntries(3)
+    const { rerender } = render(
+      <DataGrid ariaLabel="team directory" columns={columns} data={data} />,
+    )
+
+    const firstMember = screen.getByRole('gridcell', { name: 'Member 01' })
+    firstMember.focus()
+    await user.keyboard('{Enter}')
+    expect(firstMember.closest('[role="row"]')).toHaveAttribute('aria-selected', 'true')
+
+    rerender(
+      <DataGrid
+        ariaLabel="team directory"
+        columns={columns}
+        data={[...data].reverse()}
+      />,
+    )
+    expect(screen.getByRole('gridcell', { name: 'Member 01' }).closest('[role="row"]'))
+      .toHaveAttribute('aria-selected', 'true')
   })
 
 
